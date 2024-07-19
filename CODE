@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Timer</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 50px;
+    }
+    #timer {
+        font-size: 48px;
+    }
+</style>
+</head>
+<body>
+    <div id="timer">00:00:00</div>
+    <br>
+    <button onclick="startTimer()">Start Timer</button>
+    <button onclick="stopTimer()">Stop Timer</button>
+
+    <script>
+        let timer;
+        let hours = 0, minutes = 0, seconds = 0;
+
+        function startTimer() {
+            timer = setInterval(incrementTimer, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+        }
+
+        function incrementTimer() {
+            seconds++;
+            if (seconds >= 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes >= 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+
+            displayTimer();
+        }
+
+        function displayTimer() {
+            let hoursText = hours < 10 ? "0" + hours : hours;
+            let minutesText = minutes < 10 ? "0" + minutes : minutes;
+            let secondsText = seconds < 10 ? "0" + seconds : seconds;
+
+            document.getElementById("timer").textContent = hoursText + ":" + minutesText + ":" + secondsText;
+        }
+    </script>
+</body>
+</html>
